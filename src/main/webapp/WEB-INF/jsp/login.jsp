@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="login" method="post">
+	<form action="login.ram" method="post">
 		username：<input type="text" name="username"><br>
 		password：<input type="password" name="password"><br>
 		<input type="submit" value="提交">

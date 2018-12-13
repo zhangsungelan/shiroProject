@@ -2,14 +2,19 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<!-- 放行静态资源，前提是springmvc拦截设为"/"，静态资源web容器处理，其余交给DispatcherServlet -->
 	<!-- <mvc:default-servlet-handler/> -->
 
 	<!-- 配置了@controller注解使用前提,使@Controller注解生效 -->
 	<mvc:annotation-driven />
+	
+	<!-- 扫描Controller层文件 -->
+	<context:component-scan base-package="com.zhangsun" />
 
 	<!-- 配置视图解析器 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
