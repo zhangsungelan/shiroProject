@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation=
+	   "http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- 1.是用于激活那些已经在spring容器里注册过的bean上面的注解,作用等于<context:annotation-config> -->
+	<!-- 2.自动将带有@component,@service,@Repository等注解的对象注册到spring容器中 -->
+	<context:component-scan base-package="com.zhangsun" />
+
+	<!-- 相当于注册一个PropertyPlaceholderConfigurer的bean，用来加载属性配置文件，只能生效第一个 -->
+	<context:property-placeholder
+		location="classpath:db.properties" />
+
+	<!-- 声明数据源dataSource,自带有关闭数据源的close方法 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+   		<property name="driverClass" value="${db.driver}"/>
+        <property name="jdbcUrl" value="${db.url}"/>
+        <property name="user" value="${db.user}"/>
+        <property name="password" value="${db.password}"/>
+ 	</bean>
+
+	<!-- 基于数据源事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 配置基于注解的声明式事务 @Transactional -->
+	<tx:annotation-driven
+		transaction-manager="transactionManager"></tx:annotation-driven>
+
+	<!-- 声明SqlSessionFactoryBean -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- <property name="configLocation" value="classpath:mybatis.xml" /> -->
+	</bean>
+
+</beans>

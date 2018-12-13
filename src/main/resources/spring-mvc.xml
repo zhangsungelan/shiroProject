@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 放行静态资源，前提是springmvc拦截设为"/"，静态资源web容器处理，其余交给DispatcherServlet -->
+	<!-- <mvc:default-servlet-handler/> -->
+
+	<!-- 配置了@controller注解使用前提,使@Controller注解生效 -->
+	<mvc:annotation-driven />
+
+	<!-- 配置视图解析器 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 配置从项目根目录到指定目录一端路径 ,建议指定浅一点的目录-->
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <!-- 文件的后缀名 -->
+        <property name="suffix" value=".jsp"></property>
+	</bean>
+	
+</beans>
