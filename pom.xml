@@ -8,10 +8,15 @@
 	<packaging>war</packaging>
 
 	<properties>
-		<version.spring>4.3.4.RELEASE</version.spring>
+		<version.spring>5.1.3.RELEASE</version.spring>
 		<version.shiro>1.3.2</version.shiro>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${version.spring}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>

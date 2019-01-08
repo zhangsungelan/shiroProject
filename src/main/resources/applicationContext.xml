@@ -12,7 +12,10 @@
 
 	<!-- 1.是用于激活那些已经在spring容器里注册过的bean上面的注解,作用等于<context:annotation-config> -->
 	<!-- 2.自动将带有@component,@service,@Repository等注解的对象注册到spring容器中 -->
-	<context:component-scan base-package="com.zhangsun" />
+	<context:component-scan base-package="com.zhangsun" >
+		<!-- 不扫描controller -->
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
 
 	<!-- 相当于注册一个PropertyPlaceholderConfigurer的bean，用来加载属性配置文件，只能生效第一个 -->
 	<context:property-placeholder
