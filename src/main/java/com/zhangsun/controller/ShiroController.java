@@ -18,7 +18,6 @@ public class ShiroController {
 		if(username.equals("zhangsun") & password.equals("123456")) {
 			flag=true;
 		}
-		//dfsdfsdfsd
 		System.out.println(flag);
 		model.addAttribute("username", "hello :" + username);
 		return "success";
